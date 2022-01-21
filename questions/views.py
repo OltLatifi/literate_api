@@ -1,7 +1,18 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
+from rest_framework import generics
 from rest_framework import permissions
-from .serializers import UserSerializer, GroupSerializer
+from .serializers import UserSerializer, GroupSerializer, QuestionSerializer
+from .models import Question
+
+class QuestionList(generics.ListAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+    
+
+class QuestionView(generics.CreateAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
