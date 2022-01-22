@@ -25,6 +25,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'questions',
     'rest_framework',
     'django.contrib.admin',
@@ -43,7 +44,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
+
+
+# so i can fetch the data from the api from react
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'literate_api.urls'
 
