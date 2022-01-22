@@ -15,6 +15,10 @@ class QuestionView(generics.CreateAPIView):
     serializer_class = QuestionSerializer
 
 
+class UpdateQuestionView(generics.UpdateAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.

@@ -12,6 +12,8 @@ router.register(r'groups', views.GroupViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('questions/', views.QuestionList.as_view(), name="questions"),
+    path('approve-question/<int:pk>', views.UpdateQuestionView.as_view()),
     path('create-questions/', views.QuestionView.as_view(), name="create-questions"),
+    
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
