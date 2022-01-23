@@ -1,9 +1,17 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import generics
-from rest_framework import permissions
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from .serializers import UserSerializer, GroupSerializer, QuestionSerializer
 from .models import Question
+
+
+from django.contrib.auth import login
+from rest_framework.authtoken.serializers import AuthTokenSerializer
+from django.contrib.auth import authenticate
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
 
 class QuestionList(generics.ListAPIView):
     queryset = Question.objects.all()
@@ -13,9 +21,11 @@ class QuestionList(generics.ListAPIView):
 class QuestionView(generics.CreateAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
+    permission_classes=[AllowAny,]
 
 
 class UpdateQuestionView(generics.UpdateAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
 
@@ -29,7 +39,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -38,4 +48,4 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
