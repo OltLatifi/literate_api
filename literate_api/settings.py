@@ -61,6 +61,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES':[
         'rest_framework.permissions.AllowAny',
     ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '20/second',
+    }
 }
 
 SIMPLE_JWT = {
