@@ -1,9 +1,8 @@
 from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from .serializers import UserSerializer, GroupSerializer, QuestionSerializer
-from .models import Question
+from .serializers import QuestionSerializer, JokeSerializer
+from .models import Question, Joke
 
 
 from django.contrib.auth import login
@@ -33,19 +32,24 @@ class FilteredQuestionList(generics.ListAPIView):
     queryset = Question.objects.filter(approved=True)
     serializer_class = QuestionSerializer
 
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
 
 
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
+class JokeList(generics.ListAPIView):
+    queryset = Joke.objects.all()
+    serializer_class = JokeSerializer
+    
+
+class JokeView(generics.CreateAPIView):
+    queryset = Joke.objects.all()
+    serializer_class = JokeSerializer
+    permission_classes=[AllowAny,]
+
+
+class FilteredJokeView(generics.UpdateAPIView):
     permission_classes = [IsAuthenticated]
+    queryset = Joke.objects.all()
+    serializer_class = JokeSerializer
+
+class FilteredJokeList(generics.ListAPIView):
+    queryset = Joke.objects.filter(approved=True)
+    serializer_class = JokeSerializer

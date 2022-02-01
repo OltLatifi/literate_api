@@ -1,25 +1,19 @@
-from django.contrib.auth.models import User, Group
-from .models import Question
+from django.contrib.auth.models import User
+from .models import Question, Joke
 from rest_framework import serializers
 
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ['url', 'username', 'email', 'groups']
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['url', 'name']
-
 
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
+        fields = "__all__"
+
+class JokeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Joke
         fields = "__all__"
 
 
