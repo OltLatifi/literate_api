@@ -11,10 +11,10 @@ urlpatterns = [
     path('approve-question/<int:pk>', views.UpdateQuestionView.as_view()),
     path('create-questions/', views.QuestionView.as_view(), name="create-questions"),
 
-    path('jokes/', views.QuestionList.as_view(), name="jokes"),
-    path('approved-jokes/', views.FilteredQuestionList.as_view()),
-    path('approve-jokes/<int:pk>', views.UpdateQuestionView.as_view()),
-    path('create-jokes/', views.QuestionView.as_view(), name="create-jokes"),
+    path('jokes/', views.JokeList.as_view(), name="jokes"),
+    path('approved-jokes/', views.FilteredJokeList.as_view()),
+    path('approve-jokes/<int:pk>', views.UpdateJokeView.as_view()),
+    path('create-jokes/', views.JokeView.as_view(), name="create-jokes"),
     
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

@@ -45,7 +45,7 @@ class JokeView(generics.CreateAPIView):
     permission_classes=[AllowAny,]
 
 
-class FilteredJokeView(generics.UpdateAPIView):
+class UpdateJokeView(generics.UpdateAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Joke.objects.all()
     serializer_class = JokeSerializer
